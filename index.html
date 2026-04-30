@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tifosi UD - Web Oficial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0a1a3f',
+            navyLight: '#1e3a8a',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-navy text-white min-h-screen flex flex-col items-center justify-center p-4">
+  <header class="w-full text-center mb-8">
+    <h1 class="text-4xl font-bold text-white">Tifosi UD</h1>
+    <nav class="mt-4 space-x-4">
+      <a href="#" class="text-white hover:underline">Inicio</a>
+      <a href="#" class="text-white hover:underline">Próximo Partido</a>
+      <a href="#" class="text-white hover:underline">Resultados</a>
+      <a href="#" class="text-white hover:underline">Clasificación</a>
+    </nav>
+  </header>
+
+  <main id="content" class="w-full max-w-4xl space-y-12 mb-12"></main>
+
+  <script>
+    async function loadData() {
+      const res = await fetch('datos.json');
+      const data = await res.json();
+      render(data);
+    }
+
+    function render(data) {
+      const content = document.getElementById('content');
+
+      // Próximo Partido
+      const next = data.proximoPartido;
+      const nextCard = `
+        <div class="bg-navyLight rounded-xl p-6 shadow-lg text-center w-full">
+          <h2 class="text-2xl font-semibold mb-2">Próximo Partido</h2>
+          <p class="text-xl"><strong>Rival:</strong> ${next.rival}</p>
+          <p class="text-xl"><strong>Fecha:</strong> ${next.fecha}</p>
+          <p class="text-xl"><strong>Hora:</strong> ${next.hora}</p>
+        </div>
+      `;
+      content.innerHTML += nextCard;
+
+      // Resultados
+      const resultados = data.resultados;
+      const resultsGrid = resultados.map(r => `
+        <div class="bg-white bg-opacity-10 rounded-lg p-4 flex flex-col items-center w-64">
+          <img src="https://via.placeholder.com/150?text=${encodeURIComponent(r.rival)}" alt="${r.rival}" class="w-24 h-24 object-cover rounded-full mb-2">
+          <p class="font-medium">${r.rival}</p>
+          <p class="text-sm text-gray-600">Goles: ${r.golesTifosi}-${r.golesRival}</p>
+          <p class="text-xs text-gray-500">${r.fecha}</p>
+        </div>
+      `).join('');
+      const resultsSection = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          ${resultsGrid}
+        </div>
+      `;
+      content.innerHTML += resultsSection;
+
+      // Clasificación
+      const tabla = data.clasificacion.map(row => `
+        <tr class="bg-white bg-opacity-10 rounded-md p-2 flex justify-between items-center">
+          <span class="font-medium">${row.posicion}</span>
+          <span class="flex-1 text-left pl-2">${row.equipo}</span>
+          <span class="w-16 text-center">${row.partidosJugados}</span>
+          <span class="w-16 text-center text-lg font-semibold">${row.puntos}</span>
+        </tr>
+      `).join('');
+      const standingsTable = `
+        <div class="bg-navyLight rounded-xl p-6">
+          <h2 class="text-2xl font-semibold mb-4">Clasificación</h2>
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-navy text-white">
+                <th class="text-left">Pos</th>
+                <th class="text-left">Equipo</th>
+                <th class="text-center">PJ</th>
+                <th class="text-center">Puntos</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tabla}
+            </tbody>
+          </table>
+        </div>
+      `;
+      content.innerHTML += standingsTable;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadData();
+      // Dark mode detection and toggle
+      if (localStorage.getItem('dark') === 'true' || (!('dark' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.body.classList.add('dark');
+      }
+      const toggle = document.createElement('button');
+      toggle.textContent = '🌓';
+      toggle.className = 'fixed bottom-4 right-4 bg-navyLight rounded-full p-2 shadow-lg text-white hover:bg-navy';
+      toggle.onclick = () => {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+        localStorage.setItem('dark', isDark);
+      };
+      document.body.appendChild(toggle);
+    });
+  </script>
+</body>
+</html>

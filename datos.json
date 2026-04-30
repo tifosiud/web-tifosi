@@ -1,0 +1,52 @@
+{
+  "proximoPartido": {
+    "rival": "Juventus",
+    "fecha": "2026-05-10",
+    "hora": "20:45"
+  },
+  "resultados": [
+    {
+      "rival": "Roma",
+      "golesTifosi": 3,
+      "golesRival": 1,
+      "fecha": "2026-04-20"
+    },
+    {
+      "rival": "Inter",
+      "golesTifosi": 1,
+      "golesRival": 2,
+      "fecha": "2026-04-15"
+    },
+    {
+      "rival": "Napoli",
+      "golesTifosi": 2,
+      "golesRival": 2,
+      "fecha": "2026-04-05"
+    }
+  ],
+  "clasificacion": [
+    {
+      "posicion": 1,
+      "equipo": "Tifosi UD",
+      "partidosJugados": 5,
+      "puntos": 12    },
+    {
+      "posicion": 2,
+      "equipo": "Juventus",
+      "partidosJugados": 5,
+      "puntos": 10
+    },
+    {
+      "posicion": 3,
+      "equipo": "Inter",
+      "partidosJugados": 5,
+      "puntos": 9
+    },
+    {
+      "posicion": 4,
+      "equipo": "Napoli",
+      "partidosJugados": 5,
+      "puntos": 7
+    }
+  ]
+}
