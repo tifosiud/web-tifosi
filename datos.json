@@ -1,9 +1,25 @@
-[
-  {
-    "Campo": "Local",
-    "Rival": "Juventus",
-    "Goles Rival": 2,
-    "Goles Tifosi": 3,
-    "Goleadores": "Victor (2), Ricky (1)"
+{
+  "partidos": [
+    {
+      "local": "Tifosi",
+      "rival": "Juventus",
+      "golesLocal": 3,
+      "golesRival": 2,
+      "goleadores": [
+        {"nombre": "Victor", "goles": 2},
+        {"nombre": "Ricky", "goles": 1}
+      ]
+    }
+  ],
+  "estadisticas": {
+    "partidosJugados": 1,
+    "golesFavor": 3,
+    "golesContra": 2,
+    "diferenciaGoles": 1,
+    "puntos": 3,
+    "goleadores": [
+      {"nombre": "Victor", "goles": 2},
+      {"nombre": "Ricky", "goles": 1}
+    ]
   }
-]
+}
