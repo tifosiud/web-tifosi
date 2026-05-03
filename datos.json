@@ -1,5 +1,9 @@
-{
-"equipo": "Juventus",
-"resultado": "Juventus 2-1 AC Milan",
-"analisis": "La Juventus mostró solidez defensiva y aprovechó las oportunidades de contraataque, con goles de Vlahović y Chiesa. A pesar de la presión final del Milan, el equipo mantuvo la ventaja y aseguró tres puntos vitales."
-}
+[
+  {
+    "Campo": "Local",
+    "Rival": "Juventus",
+    "Goles Rival": 2,
+    "Goles Tifosi": 3,
+    "Goleadores": "Victor (2), Ricky (1)"
+  }
+]
